@@ -4,7 +4,7 @@ let logger;
 
 export default class RolesHandler {
   constructor(private _engine: Engine, user) {
-    logger = _engine.log.log('@roles');
+    logger = _engine.log.log('service:roles');
   }
 
   async get(req, res, next) {
