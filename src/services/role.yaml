@@ -30,7 +30,7 @@ paths:
             $ref: '#/definitions/Error'
       security:
         - role_auth:
-            - 'read_roles'
+            - 'read_role'
   /role:
     post:
       summary: Creates a role
@@ -51,7 +51,7 @@ paths:
             $ref: '#/definitions/Error'
       security:
         - role_auth:
-            - 'create_roles'
+            - 'create_role'
   /role/{id}:
     get:
       summary: Returns role
@@ -76,7 +76,7 @@ paths:
             $ref: '#/definitions/Error'
       security:
         - role_auth:
-            - 'read_roles'
+            - 'read_role'
     put:
       summary: Updates a role
       description: |
@@ -100,7 +100,7 @@ paths:
             $ref: '#/definitions/Error'
       security:
         - role_auth:
-            - 'update_roles'
+            - 'modify_role'
     delete:
       summary: Deletes role
       description: |
@@ -124,7 +124,7 @@ paths:
             $ref: '#/definitions/Error'
       security:
         - role_auth:
-            - 'delete_roles'
+            - 'delete_role'
 definitions:
   Role:
     properties:
