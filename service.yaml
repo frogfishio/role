@@ -30,10 +30,6 @@ registry:
         - /role.yaml
       handlers:
         - /handlers
-      # configuration: 
-      #   one: two
-      #   hello: world
-      #   some: config
 
 roles:
   admin:
