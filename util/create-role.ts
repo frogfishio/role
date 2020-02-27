@@ -1,4 +1,4 @@
-import Engine from '@frogfish/engine'
+import Engine from '@frogfish/kona'
 
 const engine = Engine('debug', '../test/config.yaml').start();
 engine.on('started', () => {
