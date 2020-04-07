@@ -30,13 +30,3 @@ registry:
         - /role.yaml
       handlers:
         - /handlers
-
-roles:
-  admin:
-    name: Administrator
-    permissions:
-      - admin
-      - read_role
-      - create_role
-      - delete_role
-      - modify_role
