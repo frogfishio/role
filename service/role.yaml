@@ -31,33 +31,6 @@ paths:
       security:
         - role_auth:
             - 'read_roles'
-  /roles/export/{name}:
-    get:
-      summary: Get all roles
-      description: |
-        Gets all roles
-      parameters:
-        - name: name
-          in: path
-          description: File name to save it as
-          required: true
-          type: string
-      tags:
-        - Role
-      responses:
-        '200':
-          description: An array of roles
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Role'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      security:
-        - role_auth:
-            - 'read_roles'
   /roles/import:
     post:
       summary: Imports roles
