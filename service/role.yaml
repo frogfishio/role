@@ -30,7 +30,55 @@ paths:
             $ref: '#/definitions/Error'
       security:
         - role_auth:
-            - 'read_role'
+            - 'read_roles'
+  /roles/export/{name}:
+    get:
+      summary: Get all roles
+      description: |
+        Gets all roles
+      parameters:
+        - name: name
+          in: path
+          description: File name to save it as
+          required: true
+          type: string
+      tags:
+        - Role
+      responses:
+        '200':
+          description: An array of roles
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Role'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - role_auth:
+            - 'read_roles'
+  /roles/import:
+    post:
+      summary: Imports roles
+      description: |
+        Creates or replaces the roles in bulk
+      tags:
+        - Role
+      responses:
+        '200':
+          description: An array of roles
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Role'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - role_auth:
+            - 'import_roles'
   /role:
     post:
       summary: Creates a role
@@ -51,7 +99,7 @@ paths:
             $ref: '#/definitions/Error'
       security:
         - role_auth:
-            - 'create_role'
+            - 'create_roles'
   /role/{id}:
     get:
       summary: Returns role
@@ -76,8 +124,8 @@ paths:
             $ref: '#/definitions/Error'
       security:
         - role_auth:
-            - 'read_role'
-    put:
+            - 'read_roles'
+    patch:
       summary: Updates a role
       description: |
         Updates a role
@@ -100,7 +148,7 @@ paths:
             $ref: '#/definitions/Error'
       security:
         - role_auth:
-            - 'modify_role'
+            - 'modify_roles'
     delete:
       summary: Deletes role
       description: |
@@ -124,7 +172,7 @@ paths:
             $ref: '#/definitions/Error'
       security:
         - role_auth:
-            - 'delete_role'
+            - 'delete_roles'
 definitions:
   Role:
     properties:

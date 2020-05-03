@@ -4,7 +4,7 @@
   "description": "Role Service for Frogfish Engine",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "gulp prepare-debug; tsc; mocha --exit --recursive build/debug/test/account",
+    "test": "DEBUG=engine*,service:* ENGINE_SYSTEM_ROOT=$PWD mocha --exit --recursive build/debug/test/role",
     "watch": "gulp prepare-debug; tsc -w",
     "start": "mkdir -p build/debug/src; cp src/services/role.yaml build/debug/src; DEBUG=engine*,svc:*  tsc-watch --onSuccess \"node node_modules/@frogfish/kona/engine -c service.yaml --root $PWD/build/debug/src\"",
     "build": "gulp build",
@@ -22,13 +22,19 @@
   },
   "homepage": "https://github.com/frogfishio/role#readme",
   "dependencies": {
-    "@frogfish/kona": "^2.1.1"
+    "@frogfish/kona": "^2.1.2"
   },
   "devDependencies": {
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.13.4",
+    "chai": "^4.2.0",
+    "chai-like": "^1.1.1",
+    "chai-things": "^0.2.0",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-typescript": "^5.0.1",
     "mkdirp": "^0.5.5",
+    "mocha": "^7.1.2",
     "typescript": "^3.8.3"
   }
 }

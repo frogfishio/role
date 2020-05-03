@@ -31,9 +31,11 @@ export default class RoleHandler {
     }
   }
 
-  async put(req, res, next) {
+  async patch(req, res, next) {
     try {
-      return res.json(await this._engine.role.update(req.path.split('/')[3], req.body));
+      return res.json(
+        await this._engine.role.update(req.path.split('/')[3], req.body)
+      );
     } catch (err) {
       err.send(res);
     }
