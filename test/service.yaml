@@ -59,6 +59,7 @@ roles:
     name: Member
     permissions:
       - member
+      - read_assignable_roles
 
 auth:
   bearerTokenTTL: 3600 # default = 3600

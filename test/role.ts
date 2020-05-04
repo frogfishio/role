@@ -22,6 +22,7 @@ describe('Role service', function () {
   let testScopedRoleId;
   let testUserId;
   let testUserData;
+  let token;
 
   beforeEach(async () => {
     engine = await require('./helper').engine();
@@ -84,7 +85,7 @@ describe('Role service', function () {
     });
 
     it('get test user data', async () => {
-      const token = (
+      token = (
         await engine.auth.authenticate({
           grant_type: 'password',
           email: `testuser${TIME}@frigfish.io`,
@@ -93,14 +94,28 @@ describe('Role service', function () {
       ).access_token;
 
       testUserData = await engine.auth.resolve(`Bearer ${token}`);
-      expect(testUserData).to.have.property('permissions').which.has.all.members(['member', 'four', 'five', 'six']);
+      expect(testUserData)
+        .to.have.property('permissions')
+        .which.has.all.members(['member', 'read_assignable_roles', 'four', 'five', 'six']);
     });
 
-    // it('should get created user', async () => {
-    //   const user = await engine.user.get(testUserId);
-    //   expect(user).to.have.property('_uuid').which.equals(testUserId);
-    //   console.log(JSON.stringify(user, null, 2));
-    // });
+    it('should return the created role', async () => {
+      const result = await request.get(`${API}/roles/assignable`, null, token);
+      expect(result).to.be.instanceof(Array).with.length(0);
+    });
+
+    it('should make role assignable', async () => {
+      expect(await request.patch(`${API}/role/${testRoleId}`, { type: 'assignable' }, adminToken))
+        .to.have.property('id')
+        .with.length(36)
+        .which.equal(testRoleId);
+    });
+
+    it('should return the created role', async () => {
+      const result = await request.get(`${API}/roles/assignable`, null, token);
+      console.log(`!roles ---------------------------> ${JSON.stringify(result, null, 2)}`);
+      expect(result).to.be.instanceof(Array).with.length(1);
+    });
 
     it('should create another role', async () => {
       expect(
@@ -140,7 +155,7 @@ describe('Role service', function () {
       expect(testUserData)
         .to.have.property('permissions')
         .which.has.property('global')
-        .which.has.all.members(['member', 'four', 'five', 'six']);
+        .which.has.all.members(['member', 'read_assignable_roles', 'four', 'five', 'six']);
 
       expect(testUserData)
         .to.have.property('permissions')
@@ -174,7 +189,9 @@ describe('Role service', function () {
       testUserData = await engine.auth.resolve(`Bearer ${token}`);
 
       console.log(`!testuserdata ======> ${JSON.stringify(testUserData, null, 2)}`);
-      expect(testUserData).to.have.property('permissions').which.has.all.members(['member', 'four', 'five', 'six']);
+      expect(testUserData)
+        .to.have.property('permissions')
+        .which.has.all.members(['member', 'read_assignable_roles', 'four', 'five', 'six']);
     });
 
     it('should return global role', async () => {
@@ -208,7 +225,7 @@ describe('Role service', function () {
       testUserData = await engine.auth.resolve(`Bearer ${token}`);
 
       console.log(`!testuserdata ======> ${JSON.stringify(testUserData, null, 2)}`);
-      expect(testUserData).to.have.property('permissions').which.has.all.members(['member']);
+      expect(testUserData).to.have.property('permissions').which.has.all.members(['member', 'read_assignable_roles']);
     });
   });
 });
