@@ -1,6 +1,6 @@
 {
   "name": "@frogfish/role",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Role Service for Frogfish Engine",
   "main": "gulpfile.js",
   "scripts": {
