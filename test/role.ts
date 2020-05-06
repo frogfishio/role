@@ -71,7 +71,7 @@ describe('Role service', function () {
     it('should create test user', async () => {
       testUserId = (
         await engine.user.create({
-          email: `testuser${TIME}@frigfish.io`,
+          email: `testuser${TIME}@frogfish.io`,
           password: 'testpassword',
         })
       ).id;
@@ -88,7 +88,7 @@ describe('Role service', function () {
       token = (
         await engine.auth.authenticate({
           grant_type: 'password',
-          email: `testuser${TIME}@frigfish.io`,
+          email: `testuser${TIME}@frogfish.io`,
           password: 'testpassword',
         })
       ).access_token;
@@ -145,7 +145,7 @@ describe('Role service', function () {
       const token = (
         await engine.auth.authenticate({
           grant_type: 'password',
-          email: `testuser${TIME}@frigfish.io`,
+          email: `testuser${TIME}@frogfish.io`,
           password: 'testpassword',
         })
       ).access_token;
@@ -181,7 +181,7 @@ describe('Role service', function () {
       const token = (
         await engine.auth.authenticate({
           grant_type: 'password',
-          email: `testuser${TIME}@frigfish.io`,
+          email: `testuser${TIME}@frogfish.io`,
           password: 'testpassword',
         })
       ).access_token;
@@ -217,7 +217,7 @@ describe('Role service', function () {
       const token = (
         await engine.auth.authenticate({
           grant_type: 'password',
-          email: `testuser${TIME}@frigfish.io`,
+          email: `testuser${TIME}@frogfish.io`,
           password: 'testpassword',
         })
       ).access_token;

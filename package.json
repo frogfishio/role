@@ -22,11 +22,11 @@
   },
   "homepage": "https://github.com/frogfishio/role#readme",
   "dependencies": {
-    "@frogfish/kona": "^2.1.7"
+    "@frogfish/kona": "^2.1.12"
   },
   "devDependencies": {
     "@types/mocha": "^7.0.2",
-    "@types/node": "^13.13.4",
+    "@types/node": "^13.13.5",
     "chai": "^4.2.0",
     "chai-like": "^1.1.1",
     "chai-things": "^0.2.0",
