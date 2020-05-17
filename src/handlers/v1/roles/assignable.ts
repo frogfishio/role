@@ -11,6 +11,7 @@ export default class AssignableRolesHandler {
     try {
       return res.json(await this._engine.role.getUserRoles(this._user.id, { type: 'assignable' }));
     } catch (err) {
+      require('@frogfish/kona/error').send(err, res, logger, 'svc_role_ass1');
       err.send(res);
     }
   }
