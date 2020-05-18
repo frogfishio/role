@@ -199,6 +199,42 @@ describe('Role service', function () {
       expect(result).to.have.property('_uuid').which.equals(testRoleId);
     });
 
+    it('should create role link', async () => {
+      expect(await engine.role.link(testRoleId, 'testx'))
+        .to.have.property('id')
+        .with.length(36);
+    });
+
+    it('should get list of links', async () => {
+      const result = await engine.role.links(testRoleId);
+      expect(result).to.be.instanceof(Array).with.length(1);
+      expect(result[0]).to.have.property('from').which.equals(testRoleId);
+    });
+
+    it('should unlink role', async () => {
+      expect(await engine.role.unlink(testRoleId, 'testx'))
+        .to.have.property('found')
+        .which.equals(1);
+    });
+
+    it('should return empty links', async () => {
+      expect(await engine.role.links(testRoleId))
+        .to.be.instanceof(Array)
+        .with.length(0);
+    });
+
+    it('should create another role link', async () => {
+      expect(await engine.role.link(testRoleId, 'testy'))
+        .to.have.property('id')
+        .with.length(36);
+    });
+
+    it('should verrify creation (raw)', async () => {
+      expect(await engine.links.find({ type: 'role', from: testRoleId }))
+        .to.be.instanceof(Array)
+        .with.length(1);
+    });
+
     it('should delete global role', async () => {
       expect(await request.del(`${API}/role/${testRoleId}`, null, adminToken))
         .to.have.property('id')
@@ -226,6 +262,12 @@ describe('Role service', function () {
 
       console.log(`!testuserdata ======> ${JSON.stringify(testUserData, null, 2)}`);
       expect(testUserData).to.have.property('permissions').which.has.all.members(['member', 'read_assignable_roles']);
+    });
+
+    it('should return empty links for deleted role', async () => {
+      expect(await engine.links.find({ type: 'role', from: testRoleId }))
+        .to.be.instanceof(Array)
+        .with.length(0);
     });
   });
 });
