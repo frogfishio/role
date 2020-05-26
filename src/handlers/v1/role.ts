@@ -11,7 +11,7 @@ export default class RoleHandler {
     try {
       return res.json(await this._engine.role.get(req.path.split('/')[3]));
     } catch (err) {
-      err.send(res);
+      require('@frogfish/kona/util').error(err, res, logger, 'svc_role_get');
     }
   }
 
@@ -19,7 +19,7 @@ export default class RoleHandler {
     try {
       return res.json(await this._engine.role.create(req.body));
     } catch (err) {
-      err.send(res);
+      require('@frogfish/kona/util').error(err, res, logger, 'svc_role_post');
     }
   }
 
@@ -27,17 +27,15 @@ export default class RoleHandler {
     try {
       return res.json(await this._engine.role.remove(req.path.split('/')[3]));
     } catch (err) {
-      err.send(res);
+      require('@frogfish/kona/util').error(err, res, logger, 'svc_role_del');
     }
   }
 
   async patch(req, res, next) {
     try {
-      return res.json(
-        await this._engine.role.update(req.path.split('/')[3], req.body)
-      );
+      return res.json(await this._engine.role.update(req.path.split('/')[3], req.body));
     } catch (err) {
-      err.send(res);
+      require('@frogfish/kona/util').error(err, res, logger, 'svc_role_patch');
     }
   }
 }
